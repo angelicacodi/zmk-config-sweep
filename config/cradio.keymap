@@ -34,41 +34,6 @@
             bindings = <&kt LGUI>, <&kp TAB>, <&kt LGUI>;
         };
         
-        tmux: tmux_prefix {
-            compatible = "zmk,behavior-hold-tap";
-            label = "TMUX_PREFIX";
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            quick-tap-ms = <0>;
-            flavor = "tap-preferred";
-            bindings = <&tmux_hold>, <&tmux_tap>;
-        };
-    };
-    
-    macros {
-        tmux_tap: tmux_tap {
-            label = "TMUX_TAP";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_press &kp LCTRL>
-                , <&macro_tap &kp SPACE>
-                , <&macro_release &kp LCTRL>
-                ;
-        };
-        
-        tmux_hold: tmux_hold {
-            label = "TMUX_HOLD";
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            bindings
-                = <&macro_press &kp LCTRL>
-                , <&macro_tap &kp SPACE>
-                , <&macro_release &kp LCTRL>
-                , <&macro_param_1to1>
-                , <&macro_tap &kp MACRO_PLACEHOLDER>
-                ;
-        };
     };
 
     keymap {
@@ -86,7 +51,7 @@
         //│ Z        │ X        │ C        │ V        │ B        │   │ N        │ M        │ , <      │ . >      │ / ?      │
             &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &kp LSHIFT  &mo NAV        &mo SYM    &kp SPACE
+                                            &mo NAV     &kp LSHIFT     &kp SPACE  &mo SYM    
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
@@ -95,8 +60,8 @@
             label = "NAV";
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│ TAB      │ SWAPPER  │          │ TMUX     │ VOL+     │   │ HOME     │ PAGE DN  │ PAGE UP  │ END      │ DEL      │
-            &kp TAB    &swapper   &none      &tmux 0 0  &kp C_VOL_UP   &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &kp DEL
+        //│ TAB      │ SWAPPER  │          │          │ VOL+     │   │ HOME     │ PAGE DN  │ PAGE UP  │ END      │ DEL      │
+            &kp TAB    &swapper   &none      &none      &kp C_VOL_UP   &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &kp DEL
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│ CTRL     │ ALT      │ CMD/GUI  │ SHIFT    │ VOL-     │   │ LEFT     │ DOWN     │ UP       │ RIGHT    │ BKSPC    │
             &sk LCTRL  &sk LALT   &sk LGUI   &sk LSHIFT &kp C_VOL_DN   &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT  &kp BSPC
